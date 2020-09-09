@@ -7,8 +7,8 @@
 *Hi! My name is Stanislau Tamashou*
 
 ### 2. Contact info
-    * *email: tomaschovst@gmail.com* 
-    * *telegram : @tomsonst*
+* *email: tomaschovst@gmail.com* 
+* *telegram : @tomsonst*
 
 ### 3. Summary
 
