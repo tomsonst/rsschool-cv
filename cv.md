@@ -1,4 +1,36 @@
-Станислав Томашов
-email: tomaschovst@gmail.com 
-telegram : @tomsonst
-Каждый день идя на работу, я задавался вопросом "А что дольше?". На своей работе я не видел способов самореализоваться. До этого я уже увлекался программированием. Но теперь я захотел этому научиться и заниматься интересными вещами. Приятна мысль, что в сфере IT ты всегда развиваешься. 
+# Resume
+
+## Junior Frontend Developer
+
+### 1. First Name, Last Name 
+
+*Hi! My name is Stanislau Tamashou*
+
+### 2. Contact info
+    * *email: tomaschovst@gmail.com* 
+    * *telegram : @tomsonst*
+
+### 3. Summary
+
+*My goal is to become JS Developer. In this work, I attracted by future perspectives and posibility of self-realization.*
+
+### 4. Skills
+
+* *HTML* 
+* *CSS*
+* *JS*
+* *git*
+
+### 5. Code Examples
+
+### 6. Experience
+
+*I solve tasks at [codewars](https://www.codewars.com/) and have some simple sites.*
+
+### 7. Education
+
+*I finished the [htmlacademy course.](https://htmlacademy.ru/)*
+
+### 8. English
+
+*My english level is A2*
