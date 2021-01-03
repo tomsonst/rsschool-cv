@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/style.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-image="./webpack.png"
+				data-background-size="1000px" data-background-repeat="no-repeat"></section>
+				<section data-markdown style = "font-size: 32px;" data-separator="^\n\n\n"
+				data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+					## Webpack advantages:
+
+					- helps to piece together your resources
+					- monitors changes and reruns tasks
+					- can transpile next generation JavaScript to older JavaScript standard (ES5) using Babel
+					- can transpile CoffeeScript to JavaScript
+					- can convert inline images to data: URI
+					- allows you to use require () for CSS files
+					- can split the output file into multiple files to avoid slow page load
+					<aside class="notes">
+						Shhh, these are your private notes 📝
+					</aside>
+				</section>
+				<section>
+					<section data-markdown>
+						#### Two installation methods:
+
+						- global installation
+						- local installation
+
+					</section>
+					<section>
+						Global installation 
+						<pre>For installation with yarn	
+							<code data-trim data-noescape>
+								yarn global add webpack webpack-cli
+							</code>
+						</pre>
+
+						<pre>For installation with npm	
+							<code data-trim data-noescape>
+								npm i -g webpack webpack-cli
+						</code></pre>
+					</section>
+					<section>
+						Local installation 
+						<pre>For installation with yarn	
+							<code data-trim data-noescape>
+								yarn add webpack webpack-cli -D
+						</code>
+					</pre>
+
+						<pre>For installation with npm	
+							<code data-trim data-noescape>
+								npm i webpack webpack-cli --save-dev
+						</code></pre>
+					</section>
+				</section> 
+				<section>
+					<section>Webpack settings</section>
+					<section data-markdown>
+						#### Procedure for configuring a webpack:
+	
+						- entry point
+						- conversions to be performed
+						- output point
+	
+					</section>
+				</section>
+				<section>
+					<section>Entry point</section>
+					<section>
+						<pre>Example file structure
+							<code data-trim data-noescape>
+								index.js
+									imports about.js
+									imports dashboard.js
+										imports graph.js
+										imports auth.js
+											imports api.js
+							</code>
+						</pre>
+					</section>
+					<section>
+						<pre>Add the path to the main file to webpack.config.js
+							<code data-trim data-noescape>
+								module.exports = {
+									entry: './app/index.js'
+								}
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>Loaders are needed to convert files</section>
+					<section>
+						svg-loader
+						<pre  style="font-size: 19px;">Install
+							<code data-trim data-noescape>
+								npm i svg-inline-loader -D 
+							</code>
+						</pre>
+						<pre  style="font-size: 19px;">Add to webpack.config.js
+							<code data-trim data-noescape data-line-numbers="3-7">
+								module.exports = {
+									entry: './app/index.js',
+									module: {
+										rules: [
+											{ test: /\.svg$/, use: 'svg-inline-loader' }
+										]
+									}
+								}
+							</code>
+						</pre>
+					</section>
+					<section>
+						css-loader
+						<pre  style="font-size: 19px;">Install
+							<code data-trim data-noescape>
+								npm i css-loader -D 
+							</code>
+						</pre>
+						<pre  style="font-size: 19px;">Add to webpack.config.js
+							<code data-trim data-noescape data-line-numbers="6">
+								module.exports = {
+									entry: './app/index.js',
+									module: {
+										rules: [
+											{ test: /\.svg$/, use: 'svg-inline-loader' },
+											{ test: /\.css$/, use: 'css-loader' }
+										]
+									}
+								}
+							</code>
+						</pre>
+					</section>
+					
+					<section>
+						style-loader
+						<pre  style="font-size: 18px;">Install
+							<code data-trim data-noescape>
+								npm i style-loader -D  
+							</code>
+						</pre>
+						<pre style="font-size: 18px;">Add to webpack.config.js
+							<code data-trim data-noescape data-line-numbers="6">
+								module.exports = {
+									entry: './app/index.js',
+									module: {
+										rules: [
+											{ test: /\.svg$/, use: 'svg-inline-loader' },
+											{ test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+										]
+									}
+								}
+							</code>
+						</pre>
+					</section>
+					<section>
+						file-loader
+						<pre  style="font-size: 18px;">Install
+							<code data-trim data-noescape>
+								npm install file-loader --save-dev
+							</code>
+						</pre>
+						<pre style="font-size: 18px;">Add to webpack.config.js
+							<code data-trim data-noescape data-line-numbers="7">
+								module.exports = {
+									entry: './app/index.js',
+									module: {
+										rules: [
+											{ test: /\.svg$/, use: 'svg-inline-loader' },
+											{ test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+											{ test: /\.(png|jpe?g|gif)$/i, use ‘file-loader’ }
+										]
+									}
+								}
+							</code>
+						</pre>
+					</section>
+					<section>
+						babel-loader 
+						<pre  style="font-size: 18px;">Install
+							<code data-trim data-noescape>
+								npm i babel-loader -D 
+							</code>
+						</pre>
+						<pre style="font-size: 18px;">Add to webpack.config.js
+							<code data-trim data-noescape data-line-numbers="8">
+								module.exports = {
+									entry: './app/index.js',
+									module: {
+										rules: [
+											{ test: /\.svg$/, use: 'svg-inline-loader' },
+											{ test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+											{ test: /\.(png|jpe?g|gif)$/i, use ‘file-loader’ }
+											{ test: /\.(js)$/, use: 'babel-loader' }
+										]
+									}
+								}
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>Plagins</section>
+					<section>
+						HtmlWebpackPlugin
+						<pre  style="font-size: 17px;">Install
+							<code data-trim data-noescape>
+								npm i html-webpack-plugin -D 
+							</code>
+						</pre>
+						<pre style="font-size: 17px;">Add to webpack.config.js
+							<code data-trim data-noescape data-line-numbers="1, 15-17">
+								const HtmlWebpackPlugin = require('html-webpack-plugin')
+								module.exports = {
+									entry: './app/index.js',
+									module: {
+										rules: [
+											{ test: /\.svg$/, use: 'svg-inline-loader' },
+											{ test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+											{ test: /\.(png|jpe?g|gif)$/i, use ‘file-loader’ }
+											{ test: /\.(js)$/, use: 'babel-loader' }
+										]
+										output: {
+											path: path.resolve(__dirname, 'dist'),
+											filename: 'index_bundle.js'
+										},
+										plugins: [
+   									 new HtmlWebpackPlugin()
+  									]		
+									}							
+								}
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						Output point
+					<pre style="font-size: 18px;">Add to webpack.config.js
+						<code data-trim data-noescape  data-line-numbers="10-13">
+							module.exports = {
+								entry: './app/index.js',
+								module: {
+									rules: [
+										{ test: /\.svg$/, use: 'svg-inline-loader' },
+										{ test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+										{ test: /\.(png|jpe?g|gif)$/i, use ‘file-loader’ }
+										{ test: /\.(js)$/, use: 'babel-loader' }
+									]
+									output: {
+										path: path.resolve(__dirname, 'dist'),
+										filename: 'index_bundle.js'
+									}		
+								}							
+							}
+						</code>
+					</pre>
+					</section>
+					<section data-markdown style="font-size: 32px;">
+						### Webpack process:
+	
+						1. The webpack gets the entry point located in ./app/index.js
+						2. It parses the import / require statements and creates a dependency graph
+						3. The webpack starts building the bundle by converting the code using the appropriate loaders
+						4. It builds the bundle and places it in dist / index_bundle.js
+	
+					</section>
+				</section>
+				<section>
+					<section>
+						Launching the webpack
+					<pre style="font-size: 22px;">Add script to package.json
+						<code data-trim data-noescape  data-line-numbers="">
+							"scripts": {
+								"build": "webpack"
+							}								
+						</code>
+					</pre>
+					<pre style="font-size: 22px;">And execute the command in the terminal
+						<code data-trim data-noescape  data-line-numbers="">
+							npm run build 							
+						</code>
+					</pre>
+					</section>
+					<section>
+						View changes
+						<pre style="font-size: 22px;">Add script to package.json
+							<code data-trim data-noescape  data-line-numbers="3">
+								"scripts": {
+									"build": "webpack",
+									"watch": "webpack --watch"
+								}								
+							</code>
+						</pre>
+						<pre style="font-size: 22px;">And execute the command in the terminal
+							<code data-trim data-noescape  data-line-numbers="">
+								npm run watch							
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section data-background-image="./goodbye.png"
+				data-background-size="1000px" data-background-repeat="no-repeat"></section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
